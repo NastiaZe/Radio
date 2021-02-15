@@ -6,138 +6,137 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
     @Test
-    public void shouldNotChangeStationMore() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(100);
-        assertEquals(0, radio.getCurrentStation());
+    void setCurrentStationValid() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(5);
+        assertEquals(5, music.getCurrentStation());
+
+
     }
 
     @Test
-    public void shouldNotChangeStationLess() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(-5);
-        assertEquals(0, radio.getCurrentStation());
+    void setCurrentStationInvalidMax() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(10);
+        assertEquals(9, music.getCurrentStation());
+
     }
 
     @Test
-    public void shouldChangeStation() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(5);
-        assertEquals(5, radio.getCurrentStation());
+    void setCurrentStationInvalidMin() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(-1);
+        assertEquals(0, music.getCurrentStation());
+
+
     }
 
     @Test
-    public void shouldSetNextStation() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(5);
-        radio.setNextStation();
-        assertEquals(6, radio.getCurrentStation());
+    void setCurrentStationIncreaseValid() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(5);
+        music.increaseStation();
+        assertEquals(6, music.getCurrentStation());
+
+
     }
 
     @Test
-    public void shouldSetMinStation() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(10);
-        radio.setNextStation();
-        assertEquals(0, radio.getCurrentStation());
+    void setCurrentStationIncreaseValidMax() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(9);
+        music.increaseStation();
+        assertEquals(0, music.getCurrentStation());
+
     }
 
     @Test
-    public void shouldSetPreviousStation() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(5);
-        radio.setPreviousStation();
-        assertEquals(4, radio.getCurrentStation());
+    void setCurrentStationDecreaseValid() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(5);
+        music.decreaseStation();
+        assertEquals(4, music.getCurrentStation());
+
+
     }
 
     @Test
-    public void shouldSetMaxStation() {
-        Radio radio = new Radio();
-        radio.setMaxRadiostation(10);
-        radio.setMinRadiostation(0);
-        radio.setCurrentStation(0);
-        radio.setPreviousStation();
-        assertEquals(10, radio.getCurrentStation());
+    void setCurrentStationDecreaseValidMin() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentStation(0);
+        music.decreaseStation();
+        assertEquals(9, music.getCurrentStation());
+
     }
 
     @Test
-    public void shouldNotIncreaseVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(100);
-        assertEquals(0, radio.getCurrentVolume());
+    void setCurrentVolume() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(5);
+        assertEquals(5, music.getCurrentVolume());
+
     }
 
     @Test
-    public void shouldNotDecreaseVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(-5);
-        assertEquals(0, radio.getCurrentVolume());
+    void setCurrentVolumeInvalidMax() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(11);
+        assertEquals(10, music.getCurrentVolume());
     }
 
     @Test
-    public void shouldSetVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(5);
-        assertEquals(5, radio.getCurrentVolume());
+    void setCurrentVolumeInvalidMin() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(-1);
+        assertEquals(0, music.getCurrentVolume());
+    }
+
+
+    @Test
+    void setCurrentVolumeIncreaseMax() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(10);
+        music.increaseVolume();
+        assertEquals(10, music.getCurrentVolume());
     }
 
     @Test
-    public void shouldSetNextVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(5);
-        radio.increaseCurrentVolume();
-        assertEquals(6, radio.getCurrentVolume());
+    void setCurrentVolumeIncrease() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(5);
+        music.increaseVolume();
+        assertEquals(6, music.getCurrentVolume());
     }
 
     @Test
-    public void shouldNotSetNextVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(10);
-        radio.increaseCurrentVolume();
-        assertEquals(10, radio.getCurrentVolume());
+    void setCurrentVolumeDecrease() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(5);
+        music.decreaseVolume();
+        assertEquals(4, music.getCurrentVolume());
     }
 
     @Test
-    public void shouldSetPreviousVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(5);
-        radio.decreaseCurrentVolume();
-        assertEquals(4, radio.getCurrentVolume());
+    void setCurrentVolumeDecreaseMin() {
+        Radio music = new Radio();
+        music.setOn(true);
+        music.setCurrentVolume(0);
+        music.decreaseVolume();
+        assertEquals(0, music.getCurrentVolume());
     }
 
-    @Test
-    public void shouldNotSetPreviousVolume() {
-        Radio radio = new Radio();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(0);
-        radio.decreaseCurrentVolume();
-        assertEquals(0, radio.getCurrentVolume());
-
-    }
 
 }
